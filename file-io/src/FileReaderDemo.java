@@ -2,7 +2,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class FileReaderDemo {
+
+class FileReaderDemo {
 	public static void main(String[] args) {
 		String path = "src/amazing.txt";
 		BufferedReader reader = null;

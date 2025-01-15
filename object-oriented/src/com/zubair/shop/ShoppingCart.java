@@ -1,28 +1,29 @@
 package com.zubair.shop;
 
+import java.util.ArrayList;
+
 public class ShoppingCart {
-	private Product[] items;
+	private ArrayList<Product> items;
 	private double total;
-	private int idx;
 	
 	public ShoppingCart() {
-		items = new Product[5];
+		items = new ArrayList<Product>();
 	}
 
-	public void addItem(Product p) {
-		if(idx == items.length)
-			System.out.println("Shopping cart is full!!");
+	public void addItem(Product p) throws ShoppingCartException {
+		if(5 == items.size())
+			throw new ShoppingCartException("Shopping cart is full!!");
 		else {
-			items[idx] = p;
+			items.add(p);
 			total += p.getPrice();
-			idx ++;
 		}
 	}
 	
 	public void checkout() {
-		for(int i=0;i<idx;i++) 
-			items[i].print();
+		for(Product p : items) 
+			p.print();
 		
 		System.out.println("Cart Total: " + total);
 	}
 }
+
