@@ -27,7 +27,7 @@ public class TestLifeCycle {
 	@BeforeEach
 	public void setupEach() {
 		cart = new ArrayList<>();
-		cart.add("Random");
+//		cart.add("Random");
 		System.out.println("Setup before each test case");
 	}
 	
@@ -55,7 +55,13 @@ public class TestLifeCycle {
 	@Test
 	public void testTwoItem() {
 		cart.add("Item1");
+		cart.add("Item2");
 		System.out.println("Testing cart with 2 item");
-		assertEquals(4, cart.size());
+		assertEquals(2, cart.size());
 	}
 }
+
+
+
+
+

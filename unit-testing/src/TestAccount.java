@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TestAccount {
-
 	private Account acnt;
 	
 	@BeforeEach
@@ -38,3 +37,7 @@ public class TestAccount {
 		assertThrows(BalanceException.class, () -> acnt.withdraw(2000));
 	}
 }
+
+
+
+

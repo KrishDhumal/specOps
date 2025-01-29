@@ -9,13 +9,13 @@ import org.junit.jupiter.api.Timeout;
 public class TestPerformance {
 
 	@Test
-	@Timeout(unit = TimeUnit.MILLISECONDS, value = 100)
+	@Timeout(unit = TimeUnit.MILLISECONDS, value = 5)
 	public void testTimeout() throws InterruptedException {
 		Thread.sleep(10);
 	}
 	
 	@Test
 	public void testAssertTimeout() {
-		assertTimeout(Duration.ofMillis(100), () -> Thread.sleep(99));
+		assertTimeout(Duration.ofMillis(100), () -> Thread.sleep(999));
 	}
 }
