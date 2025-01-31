@@ -2,8 +2,10 @@ package com.zs.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,7 +20,7 @@ public class Department {
 	private String deptName;
 	private String location;
 	
-	@OneToMany(mappedBy = "dept")
+	@OneToMany(mappedBy = "dept", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Employee> emps;
 	
 	public Department() {

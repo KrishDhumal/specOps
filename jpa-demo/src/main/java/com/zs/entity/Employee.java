@@ -3,6 +3,7 @@ package com.zs.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -17,6 +18,7 @@ public class Employee {
 	private double salary;
 	
 	@ManyToOne
+	@JoinColumn(name = "dept_no")
 	private Department dept;
 	
 	public Employee() {
