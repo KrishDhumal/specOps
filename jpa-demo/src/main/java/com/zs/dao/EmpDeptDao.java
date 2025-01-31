@@ -18,13 +18,13 @@ public class EmpDeptDao {
 		factory = Persistence.createEntityManagerFactory("MyJPA");
 	}
 
-	public boolean add(Object obj) {
+	public boolean addDept(Department dept) {
 		EntityManager em = factory.createEntityManager();
 		EntityTransaction txn = em.getTransaction();
 
 		txn.begin();
 		try {
-			em.persist(obj);
+			em.persist(dept);
 			txn.commit();
 			return true;
 		} catch (Exception e) {
@@ -34,6 +34,24 @@ public class EmpDeptDao {
 		}
 	}
 
+	public boolean addEmp(Employee emp, int deptNo) {
+		EntityManager em = factory.createEntityManager();
+		EntityTransaction txn = em.getTransaction();
+
+		txn.begin();
+		try {
+			Department d = em.find(Department.class, deptNo);
+			emp.setDept(d);
+			em.persist(emp);
+			txn.commit();
+			return true;
+		} catch (Exception e) {
+			txn.rollback();
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	public Department getDept(int deptNo) {
 		EntityManager em = factory.createEntityManager();
 		return em.find(Department.class, deptNo);
