@@ -34,3 +34,7 @@ public class SpringTestTemperature {
 		Assertions.assertEquals(96, f);
 	}
 }
+
+
+
+

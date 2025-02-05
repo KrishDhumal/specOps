@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ExchangeConfig {
+	
+	// <bean id="xe" class="ax5.ExchangeService" />
 
 	@Bean("xe")
 	public ExchangeService get() {

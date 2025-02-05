@@ -14,6 +14,6 @@ public class TestMessageProcessor {
 		
 		mp.process("sms", "9820108880", "Howdy");
 		mp.process("email", "zubairify", "Bonjour");
-		mp.process("wap", "@zubair", "Aloha");
+//		mp.process("wap", "@zubair", "Aloha");
 	}
 }
