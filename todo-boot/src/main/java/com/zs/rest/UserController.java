@@ -23,15 +23,15 @@ public class UserController {
 	private UserService service;
 	
 	@PostMapping(value = "/user", consumes = "application/json")
-	public String addUser(@RequestBody User user) {
+	public ResponseEntity<String> addUser(@RequestBody User user) {
 		int id = service.addUser(user);
-		return "User added with Id: " + id;
+		return new ResponseEntity<String>("User added with Id: " + id, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/user/{userid}", produces = "application/json")
-	public User getUser(@PathVariable int userid) throws InvalidUserException {
+	public ResponseEntity<User> getUser(@PathVariable int userid) throws InvalidUserException {
 		User user = service.getUser(userid);
-		return user;
+		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/users", produces = "application/json")
@@ -39,8 +39,4 @@ public class UserController {
 		return service.getAllUsers();
 	}
 	
-	@ExceptionHandler(InvalidUserException.class)
-	public ResponseEntity<String> handleException(InvalidUserException e) {
-		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
-	}
 }
