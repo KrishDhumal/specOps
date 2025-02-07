@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-	@GetMapping(value = "/hello")	// http://localhost:8080/hello
+	@GetMapping(value = "/hello")	// http://127.0.0.1:8080/hello
 	public String sayHello() {
 		return "GET: Hello Spring Boot";
 	}
