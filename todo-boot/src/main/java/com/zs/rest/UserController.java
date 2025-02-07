@@ -3,6 +3,9 @@ package com.zs.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zs.entity.User;
+import com.zs.excep.InvalidUserException;
 import com.zs.service.UserService;
 
 @RestController
@@ -25,7 +29,7 @@ public class UserController {
 	}
 	
 	@GetMapping(value = "/user/{userid}", produces = "application/json")
-	public User getUser(@PathVariable int userid) {
+	public User getUser(@PathVariable int userid) throws InvalidUserException {
 		User user = service.getUser(userid);
 		return user;
 	}
@@ -35,4 +39,8 @@ public class UserController {
 		return service.getAllUsers();
 	}
 	
+	@ExceptionHandler(InvalidUserException.class)
+	public ResponseEntity<String> handleException(InvalidUserException e) {
+		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+	}
 }

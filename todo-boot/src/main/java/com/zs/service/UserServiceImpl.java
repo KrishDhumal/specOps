@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zs.entity.User;
+import com.zs.excep.InvalidUserException;
 import com.zs.repo.UserRepository;
-
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,14 +22,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUser(int userid) {
+	public User getUser(int userid) throws InvalidUserException {
 		return repo.findById(userid).orElseThrow(() -> 
-			new IllegalArgumentException("User not found with Id: " + userid));
+			new InvalidUserException("User not found with Id: " + userid));
 	}
 
 	@Override
 	public List<User> getAllUsers() {
 		return repo.findAll();
 	}
-
 }
