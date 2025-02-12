@@ -31,8 +31,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product getByCode(int code) {
-		return repo.findById(code).get();
+	public Product getByCode(int code) throws InvalidProductException {
+		return repo.findById(code).orElseThrow(() -> 
+				new InvalidProductException("Product not found with code: " + code));
 	}
 
 	@Override

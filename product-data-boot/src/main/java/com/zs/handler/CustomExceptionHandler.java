@@ -5,10 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import com.zs.service.InvalidProductException;
 
 @ControllerAdvice
-public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
+public class CustomExceptionHandler {
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
@@ -16,4 +17,9 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>( ex.getMessage(), HttpStatus.BAD_REQUEST);
 	}
 	
+	@ExceptionHandler(InvalidProductException.class)
+	public ResponseEntity<Object> handleInvalidProductException(InvalidProductException ex) {
+	
+		return new ResponseEntity<>( ex.getMessage(), HttpStatus.BAD_REQUEST);
+	}
 }

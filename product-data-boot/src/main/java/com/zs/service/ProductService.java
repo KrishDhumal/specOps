@@ -11,7 +11,7 @@ public interface ProductService {
 	
 	List<Product> list();
 	
-	Product getByCode(int code);
+	Product getByCode(int code) throws InvalidProductException;
 	
 	void delete(int code);
 	
