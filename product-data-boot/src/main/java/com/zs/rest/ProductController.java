@@ -55,8 +55,8 @@ public class ProductController {
 		return new ResponseEntity<String>("Product deleted.", HttpStatus.OK);
 	}
 	
-	// URL: http://localhost:8880/product/Mobile
-	@GetMapping(value = "/{cat}", produces = "application/json")
+	// URL: http://localhost:8880/product/category/Mobile
+	@GetMapping(value = "/category/{cat}", produces = "application/json")
 	public ResponseEntity<List<Product>> byCategory(@PathVariable("cat") String category) {
 		return new ResponseEntity<List<Product>>(service.listByCategory(category), HttpStatus.OK);
 	}
