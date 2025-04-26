@@ -5,7 +5,7 @@ public class SyncDemo implements Runnable {
 		print(name);
 	}
 
-	private  void print(String name) { // synchronised method - locks current object by default
+	private synchronized  void print(String name) { // synchronised method - locks current object by default
 		try {
 			System.out.print("[");
 			Thread.sleep(1000);

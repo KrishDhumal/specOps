@@ -10,7 +10,7 @@ public class SortedPerson {
 		
 		Comparator<Person> nameComp = (p1, p2) -> p1.getName().compareTo(p2.getName());
 		
-		TreeSet<Person> people = new TreeSet<Person>();
+		TreeSet<Person> people = new TreeSet<Person>(nameComp);
 		people.add(new Person("Polo", 21));
 		people.add(new Person("Jack", 25));
 		people.add(new Person("Lili", 23));
