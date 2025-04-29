@@ -49,15 +49,45 @@ public class AlbumUI {
 	}
 
 	private static void findAlbum() {
-		System.out.print("Enter Title: ");
-		String title = scanner.next();
-		try {
-			Album a = service.findByTitle(title);
-			System.out.println(a);
-		} catch (InvalidAlbumException e) {
-			System.out.println(e.getMessage());
-		}
+	    System.out.print("Select Genre: ");
+	    String genre = scanner.next();
+	    try {
+	        List<Album> albumsByGenre = service.findByGenre(genre);
+	        System.out.println("Albums in genre '" + genre + "':");
+	        for (Album album : albumsByGenre) {
+	            System.out.println(album.getTitle());
+	        }
+
+	        System.out.print("Enter Title: ");
+	        String title = scanner.next();
+	        List<Album> albums = service.findAlbumsByTitle(title);
+	        if (albums.isEmpty()) {
+	            throw new InvalidAlbumException("No album found with title: " + title);
+	        }
+
+	        System.out.println("Title: " + title);
+	        System.out.print("Artists with this title: ");
+	        for (Album a : albums) {
+	            System.out.print(a.getArtist() + "  ");
+	        }
+	        System.out.println();
+
+	        System.out.print("Enter Artist Name: ");
+	        String artist = scanner.next();
+	        try {
+	            Album a = service.findByArtist(artist);
+	            System.out.println(a);
+	        } catch (InvalidAlbumException e) {
+	            System.out.println(e.getMessage());
+	        }
+
+	    } catch (InvalidAlbumException e) {
+	        System.out.println(e.getMessage());
+	    }
 	}
+
+
+
 
 	private static void listAlbums() {
 		List<Album> albums = service.list();

@@ -12,6 +12,9 @@ public interface AlbumDao {
 	List<Album> list();
 	
 	Optional<Album> findByTitle(String title);
+	Optional<Album> findByArtist(String artist);
+	List<Album> findAlbumsByTitle(String title);
+	List<Album> findByGenre(String genre);
 	
 	void delete(Album a);
 }

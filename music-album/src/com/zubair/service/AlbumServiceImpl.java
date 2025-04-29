@@ -23,6 +23,14 @@ public class AlbumServiceImpl implements AlbumService {
 	public List<Album> list() {
 		return dao.list();
 	}
+	@Override
+	public List<Album> findByGenre(String genre) throws InvalidAlbumException {
+	    List<Album> albums = dao.findByGenre(genre);
+	    if (albums.isEmpty()) {
+	        throw new InvalidAlbumException("No albums found for genre: " + genre);
+	    }
+	    return albums;
+	}
 
 	@Override
 	public Album findByTitle(String title) throws InvalidAlbumException {
@@ -31,16 +39,23 @@ public class AlbumServiceImpl implements AlbumService {
 	}
 
 	@Override
+	public Album findByArtist(String artist) throws InvalidAlbumException {
+		return dao.findByArtist(artist).orElseThrow(() -> 
+			new InvalidAlbumException("Album not found: " + artist));
+	}
+
+	@Override
 	public void delete(String title) throws InvalidAlbumException {
 		Album a = findByTitle(title);
 		dao.delete(a);
 	}
+
+	@Override
+	public List<Album> findAlbumsByTitle(String title) throws InvalidAlbumException {
+		List<Album> albums = dao.findAlbumsByTitle(title);
+		if (albums.isEmpty()) {
+			throw new InvalidAlbumException("Album not found: " + title);
+		}
+		return albums;
+	}
 }
-
-
-
-
-
-
-
-

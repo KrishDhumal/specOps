@@ -22,6 +22,17 @@ public class AlbumDaoImpl implements AlbumDao {
 	public List<Album> list() {
 		return albums;
 	}
+	@Override
+	public List<Album> findByGenre(String genre) {
+	    List<Album> result = new ArrayList<>();
+	    for (Album a : albums) {
+	        if (a.getGenre().equalsIgnoreCase(genre)) {
+	            result.add(a);
+	        }
+	    }
+	    return result;
+	}
+
 
 	@Override
 	public Optional<Album> findByTitle(String title) {
@@ -29,6 +40,22 @@ public class AlbumDaoImpl implements AlbumDao {
 		return albums.stream().filter(a -> a.getTitle().equals(title))
 				.findFirst();
 	}
+	public Optional<Album> findByArtist(String artist) {
+		// Use stream to find album
+		return albums.stream().filter(a -> a.getArtist().equals(artist))
+				.findFirst();
+	}
+	@Override
+	public List<Album> findAlbumsByTitle(String title) {
+		List<Album> result = new ArrayList<>();
+		for (Album a : list()) {
+			if (a.getTitle().equalsIgnoreCase(title)) {
+				result.add(a);
+			}
+		}
+		return result;
+	}
+
 
 	@Override
 	public void delete(Album a) {

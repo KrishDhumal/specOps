@@ -9,7 +9,14 @@ public interface AlbumService {
 	
 	List<Album> list();
 	
-	Album findByTitle(String title) throws InvalidAlbumException;
+	Album findByArtist(String artist) throws InvalidAlbumException;
+	List<Album> findByTitle(String title) throws InvalidAlbumException;
+	List<Album> findAlbumsByTitle(String title) throws InvalidAlbumException;
+	List<Album> findByGenre(String genre) throws InvalidAlbumException;
+
+
 	
 	void delete(String title) throws InvalidAlbumException;
+
+	
 }
