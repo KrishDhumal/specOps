@@ -1,19 +1,43 @@
 package com.zubair.cli;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.zubair.pojo.Album;
 import com.zubair.service.AlbumService;
 import com.zubair.service.AlbumServiceImpl;
 import com.zubair.service.InvalidAlbumException;
 
+
+
 public class AlbumUI {
 	private static AlbumService service = new AlbumServiceImpl();
 	private static Scanner scanner = new Scanner(System.in);
 	
 	public static void main(String[] args) {
+		List<Album> albums = null;
+		try (Stream<String> lines = Files.lines(Paths.get("musics.txt"))){
+			albums = lines.map(line -> {
+				String[] record = line.split(",");
+				String title = record[0].split(":")[1].trim();
+				String artist = record[1].split(":")[1].trim();
+				String genre = record[2].split(":")[1].trim();
+				double rating = Double.parseDouble(record[3].split(":")[1].trim());
+				return new Album(title, artist, genre, rating);
+			}).collect(Collectors.toList());
+			albums.forEach(System.out::println);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		while (true) {
+			
 			System.out.println("Main Menu");
 			System.out.println("1: Add\n2: List\n3: Find\n4: Delete\n5: Exit");
 			System.out.print("Enter Option: ");
