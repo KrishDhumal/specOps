@@ -39,13 +39,11 @@ public class TestAlfaBeta {
         Alfa ab = b; 
         ab.demo();  
 
-        System.out.println("\nDowncasting Alfa (which points to Beta) back to Beta:");
+        System.out.println("\nDowncasting Alfa ");
         Beta ba = (Beta) ab; 
         ba.show();   
         ba.demo();   
-
-        System.out.println("\nTrying invalid downcast:");
-        Alfa a2 = new Alfa(); 
+ 
        
     }
 }
